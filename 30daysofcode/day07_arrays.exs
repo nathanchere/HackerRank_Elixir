@@ -8,8 +8,7 @@ defmodule Solution do
     |> String.split
     |> Enum.map(fn(x) -> String.strip(x) |> String.to_integer end)
     |> Enum.reverse
-
-    Enum.join(input, " ")
+    |> Enum.join(" ")
     |> IO.puts
   end
 
