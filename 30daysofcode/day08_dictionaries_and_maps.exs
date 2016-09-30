@@ -7,7 +7,8 @@ defmodule Solution do
     |> String.trim
     |> String.split
 
-    read_entries(results ++ [{name,number}], n-1)
+    Map.put_new(results, name, number)
+    |> read_entries(n-1)
   end
 
   defp read_entries(results, n) do
@@ -15,11 +16,15 @@ defmodule Solution do
   end
 
   defp read_entries(n) do
-    read_entries [], n
+    read_entries %{}, n
   end
 
   defp get_number(address_book, key) do
-
+    result = address_book[key]
+    cond do
+      result == nil -> "Not found"
+      true -> "#{key}=#{result}"
+    end
   end
 
   defp get_names(address_book) do
