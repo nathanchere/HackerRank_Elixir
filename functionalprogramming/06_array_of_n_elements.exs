@@ -1,4 +1,4 @@
-# HackerRank "Functional Programming" - Filter Positions In A List
+# HackerRank "Functional Programming" - Array Of n Elements
 
 defmodule ProperSolution do
   defp generate_array(items, count) when count < 1 do
