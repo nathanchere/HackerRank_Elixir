@@ -1,0 +1,3 @@
+# HackerRank "Functional Programming" - Lambda Calculus - Evaluating Expressions #3
+
+47
