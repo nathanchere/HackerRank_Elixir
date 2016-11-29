@@ -1,0 +1,3 @@
+# HackerRank "Functional Programming" - Lambda Calculus - Reductions #1
+
+y
