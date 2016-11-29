@@ -1,52 +1,25 @@
 # HackerRank "Cracking The Coding Interview" - Data Structures (Queues) - A Tale of Two Stacks
 
 defmodule Solution do
-  def process_commands(counter, queue) when counter == 0, do: nil
 
-  def process_commands(counter, queue) do
-    command = IO.gets("")
-    |> String.strip
-    |> process_command(counter - 1, queue)
+  def process_commands(commands), do: process_commands(commands, [], [])
+  def process_commands(commands, _, _) when commands == [], do: nil
+
+  def process_commands(["1 " <> arg|commands], queue_in, queue_out)  do
+    process_commands(commands, [arg] ++ queue_in, queue_out)
   end
 
-  def process_command("1 " <> arg, counter, queue),  do: process_commands(counter, [queue|[arg]])
-  def process_command("2", counter, [head | queue]),  do: process_commands(counter, queue)
-  def process_command("3", counter, [head | queue]) do
-    IO.puts(head)
-    process_commands(counter, [head | queue])
+  def process_commands(commands, queue_in, [])  do
+    process_commands(commands, [], Enum.reverse(queue_in))
   end
 
-  def main() do
-    IO.gets("") |> String.strip |> String.to_integer
-    |> process_commands([])
-  end
-end
-
-Solution.main()
-
-
-
-
-# HackerRank "Cracking The Coding Interview" - Data Structures (Queues) - A Tale of Two Stacks
-
-defmodule Solution do
-
-  def process_commands(commands), do: process_commands(commands, [])
-  def process_commands(commands, _) when commands == [], do: nil
-
-  def process_commands(["3"|commands], queue)  do
-    IO.puts("cmd3 #{inspect(commands)} #{inspect(queue)}")
-    process_commands(commands, queue ++ ["x"])
+  def process_commands(["2"|commands], queue_in, [head|queue_out])  do
+    process_commands(commands, queue_in, queue_out)
   end
 
-  def process_commands(["2"|commands], [head|queue])  do
-    IO.puts("cmd2 #{inspect(commands)} #{inspect(queue)}")
-    process_commands(commands, queue)
-  end
-
-  def process_commands([head|commands], queue)  do
-    IO.puts("#{inspect(head)} #{inspect(commands)} #{inspect(queue)}")
-    process_commands(commands, queue)
+  def process_commands(["3"|commands], queue_in, queue_out)  do
+    IO.puts(Enum.at(queue_out, 0))
+    process_commands(commands, queue_in, queue_out)
   end
 
   def get_input do
